@@ -16,13 +16,33 @@
     </style>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-        var socket = io();
+        var socket = io('localhost:8080', {
+            reconnectionDelayMax: 10000,
+            auth: {
+                token: "123"
+            },
+            query: {
+                "my-key": "my-value"
+            }
+        });
+
+        socket.on('connect', (stuff) => {
+            console.log('stuff', stuff);
+        });
+
+        socket.on('response', (res) => {
+            console.log('response', res);
+        });
+
+        function vote() {
+            var voteText = document.getElementById("votes");
+            console.log('voteText', voteText.value);
+            socket.emit('vote', voteText.value);
+        }
     </script>
   </head>
   <body>
     <ul id="messages"></ul>
-    <form id="form" action="">
-      <input id="input" autocomplete="off" /><button>Send</button>
-    </form>
+    <input id="votes" autocomplete="off" /><button onclick="vote()">Send</button>
   </body>
 </html>
