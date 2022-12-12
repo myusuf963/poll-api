@@ -1,27 +1,26 @@
 import mongoose from 'mongoose';
 
-const pollSchema = new mongoose.Schema({
-  title: {
+const PollSchema = new mongoose.Schema({
+  question: {
     type: String,
     required: true,
   },
   options: {
-    type: [String],
+    type: Array,
     required: true,
   },
   votes: {
     type: Array,
-    required: true,
+    required: false,
   },
   user: {
     type: String,
-    required: true,
+    required: false,
   },
-  create_at: {
+  created_at: {
     type: Date,
     default: Date.now,
   },
 });
-
-const Poll = mongoose.model('Poll', pollSchema);
+const Poll = mongoose.model('Poll', PollSchema);
 export default Poll;

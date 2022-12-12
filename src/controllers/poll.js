@@ -1,8 +1,8 @@
 import Poll from '../models/Poll.js';
 
 export const createPoll = async (req, res) => {
-  const { title } = req.body;
-  const poll = new Poll({ title });
+  const pollToCreate = req.body;
+  const poll = new Poll( pollToCreate );
   try {
     await poll.save();
     res.status(201).json({ poll });

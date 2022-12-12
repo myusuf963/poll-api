@@ -7,7 +7,12 @@ const voteSchema = new mongoose.Schema({
     required: true,
   },
   user: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+  votes: {
+    type: Array,
     required: true,
   },
   created_at: {
