@@ -1,0 +1,35 @@
+{
+  "name": "poll-api",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "This is API application for Poll component. It is based MVC framework.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/myusuf963/poll-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/myusuf963/poll-api/issues"
+  },
+  "homepage": "https://github.com/myusuf963/poll-api#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.8.0",
+    "mongoose-unique-validator": "^3.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.29.0",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.8.1"
+  }
+}
