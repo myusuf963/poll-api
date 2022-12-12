@@ -5,8 +5,8 @@
   "description": "This is API application for Poll component. It is based MVC framework.",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server.js",
-    "start": "node server.js",
+    "dev": "nodemon index.js",
+    "start": "node index.js",
     "lint": "eslint .",
     "format": "prettier --write .",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -30,7 +30,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.8.0",
     "mongoose-hidden": "^1.9.1",
-    "mongoose-unique-validator": "^3.1.0"
+    "mongoose-unique-validator": "^3.1.0",
+    "socket.io": "^4.5.4"
   },
   "devDependencies": {
     "eslint": "^8.29.0",
