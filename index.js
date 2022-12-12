@@ -27,14 +27,8 @@ app.route('/').get((req, res) => {
 dbConnector();
 const port = process.env.PORT || 8080;
 
-// app.route('/newSession').post((req, res) => {
-
-// });
-
 io.on('connection', (socket) => {
   console.log(`user: ${socket.id} connected`);
-  // console.log('query', socket.handshake.query);
-  // console.log('auth', socket.handshake.auth);
 
   socket.on('vote', (voteData) => {
     console.log('dta', voteData);
