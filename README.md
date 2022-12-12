@@ -32,4 +32,27 @@ npm run dev
 will be using Postman for API documentation and testing. You can download postman from here
 https://www.postman.com/downloads/
 
+## Development workflow, collaboration coding style
+### Branching
+We will be using git flow branching model. create a branch for each feature or fix.
+- You can read more about it here
+https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
+
+### Commit message
+We will be using conventional commit message.
+- You can read more about it here
+https://www.conventionalcommits.org/en/v1.0.0/
+
+### Pull request & Code review
+We will be using pull request for code review. assign a reviewer for each pull request. don't merge your PR without other dev approval.
+- You can read more about it here
+https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests
+
+### Code style
+We will be using eslint for code style and prettier for formatting.please install eslint and prettier extension in your IDE.
+ You can read more about it here
+https://eslint.org/docs/user-guide/getting-started
+
+
+
 
