@@ -6,10 +6,7 @@
   "extends": "eslint:recommended",
   "overrides": [
     {
-      "files": [
-        "**/*.spec.js",
-        "**/*.spec.ts"
-      ],
+      "files": ["**/*.spec.js", "**/*.spec.ts"],
       "env": {
         "mocha": true
       }
