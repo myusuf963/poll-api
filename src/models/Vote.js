@@ -11,8 +11,8 @@ const voteSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
-  votes: {
-    type: Array,
+  vote: {
+    type: String,
     required: true,
   },
   created_at: {
@@ -22,4 +22,4 @@ const voteSchema = new mongoose.Schema({
 });
 
 const Vote = mongoose.model('Vote', voteSchema);
-export default Vote;
+export { voteSchema, Vote };
