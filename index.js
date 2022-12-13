@@ -20,9 +20,8 @@ app.use(routes);
 const server = http.createServer(app);
 const io = new Server(server);
 
-app.route('/').get((req, res) => {
-  // res.send('Hey Hackathoners! 👋🏻');
-  res.sendFile('index.html', { root: '.'});
+app.route('/').get((_req, res) => {
+  res.sendFile('index.html', { root: '.' });
 });
 dbConnector();
 const port = process.env.PORT || 8080;

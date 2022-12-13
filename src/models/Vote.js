@@ -11,14 +11,15 @@ const voteSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
-  votes: {
-    type: Array,
+  vote: {
+    type: String,
     required: true,
   },
   created_at: {
     type: Date,
     default: Date.now,
   },
+  
 });
 
 const Vote = mongoose.model('Vote', voteSchema);

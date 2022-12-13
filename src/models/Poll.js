@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import voteSchema from './vote';
 
 const PollSchema = new mongoose.Schema({
   question: {
@@ -9,6 +10,12 @@ const PollSchema = new mongoose.Schema({
     type: Array,
     required: true,
   },
+  category: {
+    type: String,
+    required: true,
+    enum: ['news', 'sports', 'live-tv', 'movies', 'music', 'games', 'other'],
+  },
+
   votes: {
     type: Array,
     required: false,
@@ -17,10 +24,35 @@ const PollSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  voters: [voteSchema],
   created_at: {
     type: Date,
     default: Date.now,
   },
+  expires_at: {
+    type: Date,
+  },
+  expired: {
+    type: Boolean,
+    default: false,
+  },
+  duration: {
+    type: Number,
+    required: true,
+  },
 });
+
+PollSchema.pre('save', function (next) {
+  const poll = this;
+  poll.expired = expired(poll);
+  next();
+});
+
+const expired = (poll) => {
+  const now = new Date();
+  const expires = new Date(poll.expires_at);
+  return now > expires;
+};
+
 const Poll = mongoose.model('Poll', PollSchema);
 export default Poll;
