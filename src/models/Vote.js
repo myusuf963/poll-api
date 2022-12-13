@@ -19,8 +19,7 @@ const voteSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  
 });
 
 const Vote = mongoose.model('Vote', voteSchema);
-export default Vote;
+export { voteSchema, Vote };

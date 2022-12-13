@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import voteSchema from './vote';
+import { voteSchema } from './Vote.js';
 
 const PollSchema = new mongoose.Schema({
   question: {
