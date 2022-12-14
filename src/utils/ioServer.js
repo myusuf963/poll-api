@@ -11,8 +11,8 @@ export function createIOServer(id, server) {
 
 };
 
-export function runServer() {
-  [ io ] = servers;
+export function runIOServer() {
+  const io = getServer();
   io.on('connection', (socket) => {
     console.log(`user: ${socket.id} connected`);
   
@@ -20,6 +20,10 @@ export function runServer() {
       console.log(`${socket.id} disconnected`);
     });
   });
+
+  // io.on('/test', (namespace) => {
+  //   console.log('name', namespace);
+  // });
 };
 
 export function deleteServers() {

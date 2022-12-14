@@ -7,11 +7,11 @@ import cors from 'cors';
 import * as dotenv from 'dotenv';
 import routes from '../views/routes.js';
 import dbConnector from './dbConnector.js';
-import { createIOServer } from './ioServer.js';
+import { createIOServer, runIOServer } from './ioServer.js';
 
 let server;
 
-export function runServer() {
+export async function runServer() {
   dotenv.config();
 
   const app = express();
@@ -21,7 +21,8 @@ export function runServer() {
   app.use(routes);
 
   server = http.createServer(app);
-  createIOServer('/test', server);
+  await createIOServer('/test', server);
+  runIOServer();
 
   app.route('/').get((req, res) => {
     res.sendFile('index.html', { root: '.' });
