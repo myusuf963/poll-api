@@ -4,6 +4,8 @@ import {
   createPoll,
   getPoll,
   getPollsByCategory,
+  deletePoll,
+  updatePoll,
   makeVote,
 } from '../controllers/poll.js';
 import {
@@ -20,7 +22,7 @@ router.route('/login').post(loginUser);
 router.route('/user/:id').put(updateUser).delete(deleteUser);
 
 router.route('/poll').get(getPolls).post(createPoll);
-router.route('/poll/:id').get(getPoll);
+router.route('/poll/:id').get(getPoll).put(updatePoll).delete(deletePoll);
 router.route('/poll/:category').get(getPollsByCategory);
 router.route('/poll/vote/:id').post(makeVote);
 
