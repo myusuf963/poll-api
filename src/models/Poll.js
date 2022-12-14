@@ -33,7 +33,6 @@ const PollSchema = new mongoose.Schema({
   },
   expired: {
     type: Boolean,
-    default: false,
   },
   duration: {
     type: Number,
@@ -44,6 +43,19 @@ const PollSchema = new mongoose.Schema({
 PollSchema.pre('save', function (next) {
   const poll = this;
   poll.expired = expired(poll);
+  next();
+});
+PollSchema.pre('save', function (next) {
+  const poll = this;
+  var now = new Date();
+  poll.expires_at = now.setMinutes(now.getMinutes() + poll.duration);
+  next();
+});
+
+PollSchema.pre('save', function (next) {
+  const poll = this;
+  const now = new Date();
+  poll.expired = now > poll.expires_at;
   next();
 });
 

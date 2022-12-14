@@ -4,6 +4,7 @@ import { getServer } from '../utils/ioServer.js';
 export const createPoll = async (req, res, next) => {
   const pollToCreate = req.body;
   const poll = new Poll(pollToCreate);
+  poll.options = poll.options.map((option) => option.toLowerCase());
   try {
     await poll.save();
     return res.status(201).json({ poll });
@@ -52,17 +53,17 @@ export const makeVote = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { option } = req.body;
+    const optionToLowerCase = option.toLowerCase();
+
     const { results, options } = await Poll.findById(id);
-
-    if (!options.includes(option))
+    if (!options.includes(optionToLowerCase))
       return res.status(400).json({ message: 'Invalid vote input' });
-
-    if (option)
+    if (optionToLowerCase)
       results.length === 0 &&
         options.map((option) => {
           return results.push({ option, votes: 0 });
         });
-    const optionToUpdate = results.find((result) => result.option === option);
+    const optionToUpdate = results.find((result) => result.option === optionToLowerCase);
     if (optionToUpdate) {
       optionToUpdate.votes += 1;
     }
@@ -74,7 +75,7 @@ export const makeVote = async (req, res, next) => {
 
     const server = await getServer();
     server.of('/').emit('voteRes', {
-      poll: updatedPoll
+      poll: updatedPoll,
     });
 
     return res.status(200).json({ poll: updatedPoll });
