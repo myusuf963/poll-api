@@ -64,7 +64,7 @@ export const makeVote = async (req, res, next) => {
     const optionToLowerCase = option.toLowerCase();
     const poll = await Poll.findById(id);
     if (!poll)
-      return res.status(400).json({ message: 'There is no poll with this ID' });
+      return res.status(404).json({ message: 'There is no poll with this ID' });
     const { results, options } = await Poll.findById(id);
     if (!options.includes(optionToLowerCase))
       return res.status(400).json({ message: 'Invalid vote input' });
