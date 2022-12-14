@@ -57,6 +57,34 @@ export const getPoll = async (req, res, next) => {
   }
 };
 
+export const deletePoll = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const poll = await Poll.findByIdAndRemove(id);
+    if (!poll)
+      return res.status(404).json({ message: 'There is no poll with this ID' });
+    return res.status(200).json({ poll });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+    next(error);
+  }
+};
+
+export const updatePoll = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const pollToUpdate = req.body;
+
+    const poll = await Poll.findByIdAndUpdate(id, pollToUpdate, { new: true });
+    if (!poll)
+      return res.status(404).json({ message: 'There is no poll with this ID' });
+    return res.status(200).json({ poll });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+    next(error);
+  }
+};
+
 export const makeVote = async (req, res, next) => {
   try {
     const { id } = req.params;
