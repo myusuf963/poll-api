@@ -1,4 +1,4 @@
-import http, { createServer } from 'http';
+import http from 'http';
 import express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
@@ -7,7 +7,7 @@ import cors from 'cors';
 import * as dotenv from 'dotenv';
 import routes from '../views/routes.js';
 import dbConnector from './dbConnector.js';
-import createIOServer from './createIOServer.js';
+import { createIOServer } from './ioServer.js';
 
 let server;
 
