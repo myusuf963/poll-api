@@ -10,19 +10,18 @@ const PollSchema = new mongoose.Schema({
     type: Array,
     required: true,
   },
-  category: {
-    type: String,
-    required: true,
-    enum: ['news', 'sports', 'live-tv', 'movies', 'music', 'games', 'other'],
-  },
-
-  votes: {
-    type: Array,
+  results: {
+    type: [],
     required: false,
   },
   user: {
     type: String,
     required: false,
+  },
+  category: {
+    type: String,
+    required: true,
+    enum: ['news', 'sports', 'live-tv', 'movies', 'music', 'games', 'other'],
   },
   voters: [voteSchema],
   created_at: {
