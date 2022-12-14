@@ -33,6 +33,7 @@ const PollSchema = new mongoose.Schema({
   },
   expired: {
     type: Boolean,
+    default: false,
   },
   duration: {
     type: Number,
@@ -55,7 +56,7 @@ PollSchema.pre('save', function (next) {
 PollSchema.pre('save', function (next) {
   const poll = this;
   const now = new Date();
-  poll.expired = now > poll.expires_at;
+  poll.expired = now < poll.expires_at;
   next();
 });
 
