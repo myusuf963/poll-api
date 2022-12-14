@@ -9,7 +9,7 @@ export function createIOServer(id, server) {
     if (servers.length > 0) servers = [];
     servers.push(io);
 
-}
+};
 
 export function runServer() {
   [ io ] = servers;
@@ -20,12 +20,12 @@ export function runServer() {
       console.log(`${socket.id} disconnected`);
     });
   });
-}
+};
 
 export function deleteServers() {
   servers = [];
-}
+};
 
 export function getServer() {
   return servers[0];
-}
+};
