@@ -5,9 +5,7 @@ export const createPoll = async (req, res, next) => {
   const poll = new Poll(pollToCreate);
   try {
     await poll.save();
-    // example:
-    // createIOServer(poll.id, server);
-    res.status(201).json({ poll });
+    return res.status(201).json({ poll });
   } catch (error) {
     res.status(409).json({ message: error.message });
     next(error);
@@ -53,11 +51,7 @@ export const makeVote = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { option } = req.body;
-    const poll = await Poll.findById(id);
-    const results = poll.results;
-    // if (option) {
-    //   await poll.save();
-    // }
+    const { results } = await Poll.findById(id);
     const optionToUpdate = results.find((result) => result.option === option);
     if (optionToUpdate) {
       optionToUpdate.votes += 1;

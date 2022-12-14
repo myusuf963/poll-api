@@ -13,8 +13,8 @@ const registerUser = async (req, res, next) => {
     if (user) {
       return res.status(409).send({ message: 'User already exists' });
     }
-   await User.create(body);
-    return res.send({message:'User has been created'});
+    await User.create(body);
+    return res.send({ message: 'User has been created' });
   } catch (err) {
     next(err);
   }
@@ -88,4 +88,3 @@ const getAllUsers = async (_req, res, next) => {
 };
 
 export { registerUser, loginUser, updateUser, deleteUser, getAllUsers };
-
