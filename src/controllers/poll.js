@@ -51,18 +51,26 @@ export const makeVote = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { option } = req.body;
-    const { results } = await Poll.findById(id);
+    const { results, options } = await Poll.findById(id);
+
+    if (!options.includes(option))
+      return res.status(400).json({ message: 'Invalid vote input' });
+
+    if (option)
+      results.length === 0 &&
+        options.map((option) => {
+          return results.push({ option, votes: 0 });
+        });
     const optionToUpdate = results.find((result) => result.option === option);
     if (optionToUpdate) {
       optionToUpdate.votes += 1;
-    } else {
-      results.push({ option, votes: 1 });
     }
     const updatedPoll = await Poll.findByIdAndUpdate(
       id,
       { results },
       { new: true }
     );
+
     return res.status(200).json({ poll: updatedPoll });
   } catch (error) {
     res.status(409).json({ message: error.message });
