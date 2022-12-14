@@ -1,4 +1,5 @@
 import Poll from '../models/Poll.js';
+import { getServer } from '../utils/ioServer';
 
 export const createPoll = async (req, res, next) => {
   const pollToCreate = req.body;
@@ -70,6 +71,11 @@ export const makeVote = async (req, res, next) => {
       { results },
       { new: true }
     );
+
+    const server = await getServer();
+    server.sockets.broadcast.emit(`${id}Vote`, {
+      poll: updatedPoll
+    });
 
     return res.status(200).json({ poll: updatedPoll });
   } catch (error) {
