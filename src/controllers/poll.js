@@ -48,6 +48,8 @@ export const getPoll = async (req, res, next) => {
   try {
     const { id } = req.params;
     const poll = await Poll.findById(id);
+    if (!poll)
+      return res.status(404).json({ message: 'There is no poll with this ID' });
     return res.status(200).json({ poll });
   } catch (error) {
     res.status(404).json({ message: error.message });
@@ -60,7 +62,9 @@ export const makeVote = async (req, res, next) => {
     const { id } = req.params;
     const { option } = req.body;
     const optionToLowerCase = option.toLowerCase();
-
+    const poll = await Poll.findById(id);
+    if (!poll)
+      return res.status(404).json({ message: 'There is no poll with this ID' });
     const { results, options } = await Poll.findById(id);
     if (!options.includes(optionToLowerCase))
       return res.status(400).json({ message: 'Invalid vote input' });
