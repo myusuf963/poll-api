@@ -55,7 +55,10 @@
       }
     </style>
     <script type="module">
-        import { io, Manager } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
+      import {
+        io,
+        Manager,
+      } from 'https://cdn.socket.io/4.4.1/socket.io.esm.min.js';
       var socket = io('localhost:8080', {
         path: '/test',
       });
