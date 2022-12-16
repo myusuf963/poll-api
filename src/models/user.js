@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
   updatedAt: { type: Date, required: true, default: Date.now },
 });
 //eslint-disable-next-line
-userSchema.pre('save', function (next) {
+userSchema.pre('save', (next) => {
   this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync());
   next();
 });
@@ -34,7 +34,7 @@ userSchema.pre('save', function (next) {
 userSchema.methods.validatePassword = function (password) {
   return bcrypt.compareSync(password, this.password);
 };
-userSchema.pre('save', function (next) {
+userSchema.pre('save', (next) => {
   this.updatedAt = Date.now();
   next();
 });

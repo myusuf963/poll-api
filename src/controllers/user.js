@@ -27,9 +27,13 @@ const loginUser = async (req, res, next) => {
     if (!user || !user.validatePassword(password)) {
       return res.status(401).send({ message: 'Unauthorized' });
     }
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, {
-      expiresIn: '1h',
-    });
+    const token = jwt.sign(
+      { userId: user._id, userEmail: user.email },
+      process.env.JWT_SECRET_KEY,
+      {
+        expiresIn: '1h',
+      }
+    );
     res
       .status(202)
       .send({ token, userName: user.username, message: 'Login successful' });
